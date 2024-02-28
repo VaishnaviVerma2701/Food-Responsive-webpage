@@ -7,6 +7,7 @@
 #navbar::before{
     align-items: center;
     justify-content: center;
+    /* flex-direction: column; */
 
 }
 #navbar ul li a{
@@ -14,6 +15,7 @@ overflow: hidden;
 padding: 0px 20px;
 font-size: .9rem;
 padding-bottom: 5px;
+/* flex-direction: column; */
 }
 /* home */
 #Home{
@@ -107,5 +109,5 @@ footer {
     background: black;
     color: aliceblue;
     padding: 7px 0px;
-    margin-top: -65px;
+    margin-top: -48px;
 }

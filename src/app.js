@@ -1,8 +1,7 @@
 
-
 // app.js starting
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/newfolder")
+mongoose.connect("mongodb://127.0.0.1:27017/food")
   .then(() => {
     console.log(`Connection successful`);
   })
@@ -13,41 +12,43 @@ mongoose.connect("mongodb://127.0.0.1:27017/newfolder")
 const express = require("express");
 const path =require("path");
 const app = express();
-const port = 4000;
+const port = 3000;
 // require("./db/conn.js");
+
 
 const static_path =path.join(__dirname, "../");
 app.use(express.static(static_path));
 
 // Define the schema
-const fdSchema = new mongoose.Schema({
+const gmSchema = new mongoose.Schema({
   name: String,
-  email:String,
+  email: String,
   phone: Number,
-  message: String,
+  message: String
 });
 
 // Create a model
-const FD = mongoose.model("FD", fdSchema);
+const food = mongoose.model("food", gmSchema);
+
 // Body parser middleware
 app.use(express.urlencoded({ extended: true }));
 // Handle form submissions
 app.post("/", async (req, res) => {
   try {
     // Create a new GM instance
-    const fdMember = new FD({
+    const gmMember = new food({
       name: req.body.name,
-      email:req.body.email,
+      email: req.body.email,
       phone: req.body.phone,
       message: req.body.message,
     });
 
     // Save the data to the database
-    await fdMember.save();
+    await gmMember.save();
     res.send("Data saved successfully!");
   } catch (error) {
     console.error("Error saving data to the database:", error.message);
-    res.status(500).send("Error saving data to the database");
+    res.status(500).send("Error saving data to the database");
   }
 });
 
